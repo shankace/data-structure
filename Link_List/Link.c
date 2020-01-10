@@ -37,6 +37,10 @@ ProLink Insert(ProLink p, int k, int x){
         i++;
         p1 = p1->Next;
     }
+    if(!p1->Next){
+        p1->Next = tmp;
+        return p1;
+    }
     if(!p1->Next || i!=k-1){
         printf("error");
         return ERROR;
