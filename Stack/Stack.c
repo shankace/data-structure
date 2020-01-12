@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "Link_Stack.h"
 
 typedef int Position;
 
@@ -68,14 +69,17 @@ void Traversal(Stack s)
 
 int main(int argc, char const *argv[])
 {
-    Stack s = Init(10);
+    /* Stack s = Init(10);
     Push(s, 1);
     Traversal(s);
     Push(s, 2);
     Traversal(s);
     int x = Pop(s);
     printf("%d ", x);
-    Traversal(s);
+    Traversal(s); */
+    Link_Stack pro = Link_Stack_Init();
+    Link_Stack_Push(pro, 10);
+    printf("%d\n", pro->Next->Data);
     getchar();
     return 0;
 }
