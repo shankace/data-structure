@@ -50,11 +50,3 @@ bool Link_Stack_Pop(Link_Stack pro)
         return x;   
     }
 }
-
-
-
-
-
-
-
-
