@@ -25,6 +25,7 @@ LkQueue LkQNode_Init()
     lq->Rear = lq->Front;
     lq->Front->Data = NULL;
     lq->Front->Next = NULL;
+	return lq;
 } 
 
 bool LkQueue_Add(LkQueue lq, int x)
