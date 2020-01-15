@@ -1,50 +1,51 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include "BinTree.c"
 
+extern struct TNode;
+typedef struct TNode* BinTree;
+typedef struct Link_Node * Link;
 
-typedef struct Queue_Node* QNode;
+struct Link_Node
+{
+    BinTree Data;
+    Link Next;
+};
+
+typedef struct Queue_Node *Queue;
 
 struct Queue_Node
 {
-    BinTree Data;
-    Queue Next;
+    Link Head;
+    Link Rear;
 };
 
-typedef struct Queue *QPtr;
-
-struct Queue
+Queue Queue_Init()
 {
-    QNode Head;
-    QNode Rear;
-};
-
-QPtr Queue_Init()
-{
-    QNode qnode = (QNode)malloc(sizeof(struct Queue_Node));
-    QPtr q = (QPtr)malloc(sizeof(struct Queue));
-    qnode->Data = NULL;
-    qnode->Next = NULL;
-    q->Head = q->Rear = NULL;
+    Queue q;
+    q->Head = (Link)malloc(sizeof(struct Link_Node));
+    q->Rear = q->Head;
+    q->Head->Data = NULL;
+    q->Rear->Next = NULL;
     return q;
 }
 
-bool Queue_Add(QPtr q, BinTree BT)
+bool Queue_Add(Queue q, BinTree BT)
 {
-    QNode qnode = (QNode)malloc(sizeof(struct Queue_Node));
-    qnode->Data = BT;
-    qnode->Next = q->Rear->Next;
-    q->Rear = qnode;
+    Link tmp_link = (Link)malloc(sizeof(struct Link_Node));
+    tmp_link->Data = BT;
+    tmp_link->Next = NULL;
+    q->Rear = tmp_link;
+    q->Head->Next = tmp_link;
     return true;
 }
 
-bool Queue_IsEmpty(Qptr q)
+bool Queue_IsEmpty(Queue q)
 {
-    return q->Next==NULL;
+    return q->Head->Next==NULL;
 }
 
-BinTree Queue_Delete(QPtr q)
+BinTree Queue_Delete(Queue q)
 {
     if(Queue_IsEmpty(q))
     {
@@ -53,10 +54,10 @@ BinTree Queue_Delete(QPtr q)
     }
     else
     {
-        QNode qnode = q->Head;
-        BinTree BT = qnode->Data;
-        q->Head = qnode->Next;
-        free(qnode);
+        Link l = q->Head->Next;
+        BinTree BT = l->Data;
+        q->Head->Next = l->Next;
+        free(l);
         return BT;
     }
 }

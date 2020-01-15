@@ -1,14 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include "BinTree.c"
+
+extern struct TNode;
+typedef struct TNode* BinTree;
 
 typedef struct Stack_Node* Stack;
 
 struct Stack_Node
 {
     BinTree Data;
-    Stack Next;
+    struct Stack_Node* Next;
 };
 
 Stack Stack_Init()
@@ -32,7 +34,7 @@ bool Stack_Push(Stack s, BinTree T)
     return true;
 }
 
-BinTree stack_Pop(Stack s)
+BinTree Stack_Pop(Stack s)
 {
     if(Stack_IsEmpty(s))
     {
