@@ -5,7 +5,7 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "gcc",
+            "label": "gcc.exe build active file",
             "command": "E:\\mingw\\bin\\gcc.exe",
             "args": [
                 "-g",

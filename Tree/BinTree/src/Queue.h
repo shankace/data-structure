@@ -22,11 +22,11 @@ struct Queue_Node
 
 Queue Queue_Init()
 {
-    Queue q;
+    Queue q = (Queue)malloc(sizeof(struct Queue_Node));
     q->Head = (Link)malloc(sizeof(struct Link_Node));
     q->Rear = q->Head;
     q->Head->Data = NULL;
-    q->Rear->Next = NULL;
+    q->Head->Next = NULL;
     return q;
 }
 
@@ -35,8 +35,8 @@ bool Queue_Add(Queue q, BinTree BT)
     Link tmp_link = (Link)malloc(sizeof(struct Link_Node));
     tmp_link->Data = BT;
     tmp_link->Next = NULL;
+    q->Rear->Next = tmp_link;
     q->Rear = tmp_link;
-    q->Head->Next = tmp_link;
     return true;
 }
 
@@ -57,6 +57,9 @@ BinTree Queue_Delete(Queue q)
         Link l = q->Head->Next;
         BinTree BT = l->Data;
         q->Head->Next = l->Next;
+        /* 有一个元素和多个元素有所不同 */
+        if(!q->Head->Next)
+            q->Rear = q->Head;
         free(l);
         return BT;
     }

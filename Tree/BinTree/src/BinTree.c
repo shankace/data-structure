@@ -15,53 +15,53 @@ struct TNode
     BinTree Right;
 };
 
-void InorderTraversal(BinTree T)
-{
-    if(T)
-    {
-        InorderTraversal(T->Left);
-        printf("%d ", T->Data);
-        InorderTraversal(T->Right);
-    }
-}
+// void InorderTraversal(BinTree T)
+// {
+//     if(T)
+//     {
+//         InorderTraversal(T->Left);
+//         printf("%d ", T->Data);
+//         InorderTraversal(T->Right);
+//     }
+// }
 
-void PreorderTraversal(BinTree T)
-{
-    if(T)
-    {
-        printf("%d ", T->Data);
-        InorderTraversal(T->Left);
-        InorderTraversal(T->Right);
-    }
-}
+// void PreorderTraversal(BinTree T)
+// {
+//     if(T)
+//     {
+//         printf("%d ", T->Data);
+//         InorderTraversal(T->Left);
+//         InorderTraversal(T->Right);
+//     }
+// }
 
-void PostorderTraversal(BinTree T)
-{
-    if(T)
-    {
-        InorderTraversal(T->Left);
-        InorderTraversal(T->Right);
-        printf("%d ", T->Data);
-    }
-}
+// void PostorderTraversal(BinTree T)
+// {
+//     if(T)
+//     {
+//         InorderTraversal(T->Left);
+//         InorderTraversal(T->Right);
+//         printf("%d ", T->Data);
+//     }
+// }
 
-void InorderTraversal_nr(BinTree T)
-{
-    /* 非递归版本的中序遍历。中序遍历是在从左树返回时遇到结点访问。 */
-    struct Stack_Node * s = Stack_Init();
-    BinTree BT = T;
-    while(BT || !Stack_IsEmpty(s))
-    {
-        while(BT)
-        {
-            Stack_Push(s, BT);
-            BT = BT->Left;
-        }
-        BT = Stack_Pop(s);
-        printf("%d ", BT->Data);
-        BT = BT->Right;
-    }
-}
+// void InorderTraversal_nr(BinTree T)
+// {
+//     /* 非递归版本的中序遍历。中序遍历是在从左树返回时遇到结点访问。 */
+//     struct Stack_Node * s = Stack_Init();
+//     BinTree BT = T;
+//     while(BT || !Stack_IsEmpty(s))
+//     {
+//         while(BT)
+//         {
+//             Stack_Push(s, BT);
+//             BT = BT->Left;
+//         }
+//         BT = Stack_Pop(s);
+//         printf("%d ", BT->Data);
+//         BT = BT->Right;
+//     }
+// }
 
 void LevelTraversal(BinTree T)
 {
@@ -82,8 +82,8 @@ void LevelTraversal(BinTree T)
 
 BinTree BinTree_Init()
 {
-    BinTree BT, T;
     Queue q = Queue_Init();
+    BinTree BT, T;
     BT = (BinTree)malloc(sizeof(struct TNode));
     /* 初始化根结点 */
     int data;
@@ -118,9 +118,10 @@ BinTree BinTree_Init()
     return BT;
 }
 
-// int main(int argc, char const *argv[])
-// {
-//     BinTree BT = BinTree_Init();
-//     getchar();
-//     return 0;
-// }
+int main(int argc, char const *argv[])
+{
+    BinTree bt = BinTree_Init();
+    LevelTraversal(bt);
+    getchar();
+    return 0;
+}
