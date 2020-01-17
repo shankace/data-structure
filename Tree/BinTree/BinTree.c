@@ -3,65 +3,58 @@
 #include<stdbool.h>
 #include "Stack.h"
 #include "Queue.h"
+#include "BinTreeElem.h"
 
-typedef struct TNode* BinTree;
+
 #define NULL 0;
 
-struct TNode
+void InorderTraversal(BinTree T)
 {
-    /* 树的节点 */
-    int Data;
-    BinTree Left;
-    BinTree Right;
-};
+    if(T)
+    {
+        InorderTraversal(T->Left);
+        printf("%d ", T->Data);
+        InorderTraversal(T->Right);
+    }
+}
 
-// void InorderTraversal(BinTree T)
-// {
-//     if(T)
-//     {
-//         InorderTraversal(T->Left);
-//         printf("%d ", T->Data);
-//         InorderTraversal(T->Right);
-//     }
-// }
+void PreorderTraversal(BinTree T)
+{
+    if(T)
+    {
+        printf("%d ", T->Data);
+        PreorderTraversal(T->Left);
+        PreorderTraversal(T->Right);
+    }
+}
 
-// void PreorderTraversal(BinTree T)
-// {
-//     if(T)
-//     {
-//         printf("%d ", T->Data);
-//         InorderTraversal(T->Left);
-//         InorderTraversal(T->Right);
-//     }
-// }
+void PostorderTraversal(BinTree T)
+{
+    if(T)
+    {
+        PostorderTraversal(T->Left);
+        PostorderTraversal(T->Right);
+        printf("%d ", T->Data);
+    }
+}
 
-// void PostorderTraversal(BinTree T)
-// {
-//     if(T)
-//     {
-//         InorderTraversal(T->Left);
-//         InorderTraversal(T->Right);
-//         printf("%d ", T->Data);
-//     }
-// }
-
-// void InorderTraversal_nr(BinTree T)
-// {
-//     /* 非递归版本的中序遍历。中序遍历是在从左树返回时遇到结点访问。 */
-//     struct Stack_Node * s = Stack_Init();
-//     BinTree BT = T;
-//     while(BT || !Stack_IsEmpty(s))
-//     {
-//         while(BT)
-//         {
-//             Stack_Push(s, BT);
-//             BT = BT->Left;
-//         }
-//         BT = Stack_Pop(s);
-//         printf("%d ", BT->Data);
-//         BT = BT->Right;
-//     }
-// }
+void InorderTraversal_nr(BinTree T)
+{
+    /* 非递归版本的中序遍历。中序遍历是在从左树返回时遇到结点访问。 */
+    struct Stack_Node * s = Stack_Init();
+    BinTree BT = T;
+    while(BT || !Stack_IsEmpty(s))
+    {
+        while(BT)
+        {
+            Stack_Push(s, BT);
+            BT = BT->Left;
+        }
+        BT = Stack_Pop(s);
+        printf("%d ", BT->Data);
+        BT = BT->Right;
+    }
+}
 
 void LevelTraversal(BinTree T)
 {
@@ -122,6 +115,14 @@ int main(int argc, char const *argv[])
 {
     BinTree bt = BinTree_Init();
     LevelTraversal(bt);
+    printf("\n");
+    InorderTraversal_nr(bt);
+    printf("\n");
+    InorderTraversal(bt);
+    printf("\n");
+    PreorderTraversal(bt);
+    printf("\n");
+    PostorderTraversal(bt);
     getchar();
     return 0;
 }

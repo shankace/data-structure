@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include "BinTreeElem.h"
 
-extern struct TNode;
-typedef struct TNode* BinTree;
+
 typedef struct Link_Node * Link;
 
 struct Link_Node
